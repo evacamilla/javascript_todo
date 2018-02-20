@@ -14,12 +14,12 @@ function addNewTodo(){
     newTodoInput.value
     var newLi = document.createElement('li');
     var newTodoInputValue = document.getElementById('newTodoInput').value;
+    //*TO MAKE*check if new todo is already existing or is empty
     var newTextNode = document.createTextNode(newTodoInputValue);
     newLi.appendChild(newTextNode);
     document.getElementById('todoList').appendChild(newLi);
+    document.getElementById("newTodoInput").value = "Lägg till ny";
 }
-
-//check if new todo is already existing
 
 
 //DELETE FUNCTIONS
@@ -32,11 +32,11 @@ function addNewTodo(){
 
 
 
-//TOGGLE, REMOVE, ADD CLASS FUNCTIONS
+//TOGGLE, REMOVE, ADD CLASS FUNCTIONS FOR STYLE CHANGES
 
 
 
-//ANIMATION
+//ANIMATION TO "ALERT" USER THAT THEY MADE SOME CHANGES AND SO THE TRANSFORMATION LOOKS SMOOTH
 //some animation when a todo is completed
 
 //some animation/transition when new todo is added
