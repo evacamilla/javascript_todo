@@ -1,4 +1,4 @@
-//Button and input for making new todo
+//Button for making new todo
 const newTodoButton = document.getElementById('newTodoButton');
 
 //Buttons for deleting todos
