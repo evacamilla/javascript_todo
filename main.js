@@ -27,6 +27,8 @@ function addNewTodo(value){
     var completeButton = document.createElement('button');
     completeButton.classList.add('complete')
     completeButton.innerHTML = completeIcon;
+    //adding eventlistener
+    completeButton.addEventListener('click', CompleteTodo);
 
     newLi.appendChild(deleteTodoButton);
     newLi.appendChild(completeButton);
@@ -40,7 +42,6 @@ function addNewTodo(value){
 
 
 
-//Delete functions
 function deleteOneTodo(){
     var parentToRemove = this.parentNode;
     parentToRemoveFrom = parentToRemove.parentNode;
@@ -48,10 +49,22 @@ function deleteOneTodo(){
     parentToRemoveFrom.removeChild(parentToRemove);
 }
 
-//delete all todos
 
-//delete one completed
-//??better to make this function the same as -delete one todo- but with different parameters???
+
+
+
+function CompleteTodo(){
+    parentToMove = this.parentNode;
+    document.getElementById('completedTodoList').appendChild(parentToMove);
+    
+}
+
+
+
+
+//Delete all Todos
+
+
 
 
 
@@ -59,10 +72,14 @@ function deleteOneTodo(){
 
 
 
+
+
 //ANIMATION TO "ALERT" USER THAT THEY MADE SOME CHANGES AND SO THE TRANSFORMATION LOOKS SMOOTH
 //some animation when a todo is completed
 
 //some animation/transition when new todo is added
+
+
 
 
 
@@ -76,6 +93,9 @@ addTodoButton.addEventListener('click', function(){
     else{
     addNewTodo(addTodoInputValue);}
 });
+
+
+
 
 
 //EXTRAS
