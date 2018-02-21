@@ -1,7 +1,5 @@
-//Button for making new todo
+//Getting buttons already in html
 const addTodoButton = document.getElementById('addTodoButton');
-
-//Button for deleting all todos
 const deleteAllTodos = document.getElementById('deleteAllTodos');
 
 //Icons HTML
@@ -10,8 +8,8 @@ const completeIcon = '<i class="fas fa-check"></i>';
 
 
 
-//ADD FUNCTIONS
-//add new todo
+
+
 function addNewTodo(value){
     var newLi = document.createElement('li');
     var newValue = value;
@@ -39,11 +37,15 @@ function addNewTodo(value){
 }
 
 
-//DELETE FUNCTIONS
 
-//delete one todo
+
+
+//Delete functions
 function deleteOneTodo(){
-    console.log(this.parentNode);
+    var parentToRemove = this.parentNode;
+    parentToRemoveFrom = parentToRemove.parentNode;
+
+    parentToRemoveFrom.removeChild(parentToRemove);
 }
 
 //delete all todos
