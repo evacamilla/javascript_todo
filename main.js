@@ -28,7 +28,7 @@ function addNewTodo(value){
     completeButton.classList.add('complete')
     completeButton.innerHTML = completeIcon;
     //adding eventlistener
-    completeButton.addEventListener('click', CompleteTodo);
+    completeButton.addEventListener('click', completeTodo);
 
     newLi.appendChild(deleteTodoButton);
     newLi.appendChild(completeButton);
@@ -52,10 +52,16 @@ function deleteOneTodo(){
 
 
 
-
-function CompleteTodo(){
+//Actually toggles complete or not completed the todos
+function completeTodo(){
     parentToMove = this.parentNode;
-    document.getElementById('completedTodoList').appendChild(parentToMove);
+    parentToMoveFrom = parentToMove.parentNode;
+        if(parentToMoveFrom.id === 'todoList')
+            {
+            document.getElementById('completedTodoList').appendChild(parentToMove);
+            } else {
+                document.getElementById('todoList').appendChild(parentToMove);
+                    }
     
 }
 
