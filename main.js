@@ -1,31 +1,39 @@
 //Button for making new todo
-const newTodoButton = document.getElementById('newTodoButton');
+const addTodoButton = document.getElementById('addTodoButton');
 
 //Button for deleting all todos
 const deleteAllTodos = document.getElementById('deleteAllTodos');
 
+//Icons
+const deleteIcon = '<i class="fas fa-times"></i>';
+const completeIcon = '<i class="fas fa-check"></i>';
+
 //ADD FUNCTIONS
 //add new todo
-function addNewTodo(){
+function addNewTodo(value){
     var newLi = document.createElement('li');
-    var newTodoInputValue = document.getElementById('newTodoInput').value;
-    var newTextNode = document.createTextNode(newTodoInputValue);
+    var newValue = value;
+    var newTextNode = document.createTextNode(newValue);
     newLi.appendChild(newTextNode);
 
-    var newDeleteButton = document.createElement('button');
-    newDeleteButton.setAttribute('id', 'deleteTodoButton');
-    newDeleteButton.innerText = 'D';
+    //*TO MAKE*add class delete
+    var deleteTodoButton = document.createElement('button');
+    deleteTodoButton.classList.add('deleteTodo');
+    deleteTodoButton.setAttribute('id', 'deleteTodoButton');
+    deleteTodoButton.innerHTML = deleteIcon;
 
-    var newCompleteButton = document.createElement('button');
-    newCompleteButton.setAttribute('id', 'completeButton');
-    newCompleteButton.innerText = 'C';
+    //*TO MAKE*add class complete
+    var completeButton = document.createElement('button');
+    completeButton.classList.add('complete')
+    completeButton.setAttribute('id', 'completeButton');
+    completeButton.innerHTML = completeIcon;
 
-    newLi.appendChild(newDeleteButton);
-    newLi.appendChild(newCompleteButton);
+    newLi.appendChild(deleteTodoButton);
+    newLi.appendChild(completeButton);
 
     document.getElementById('todoList').appendChild(newLi);
     //value put to empty string so input field is empty when user clicked on add button
-    document.getElementById("newTodoInput").value = "";
+    document.getElementById("addTodoInput").value = "";
 }
 
 
@@ -51,13 +59,19 @@ function addNewTodo(){
 
 
 //EVENTLISTENERS
-//*TO MAKE*so user cant add empty string
-//so user can't make the same todo twice, maybe ask
-newTodoButton.addEventListener('click', addNewTodo);
+//*TO MAKE*so user can't make the same todo twice, maybe ask
+addTodoButton.addEventListener('click', function(){
+    var addTodoInputValue = document.getElementById('addTodoInput').value;
+    //so user cant add empty string. something more should happen though..?
+    if(addTodoInputValue == ""){
+    }
+    else{
+    addNewTodo(addTodoInputValue);}
+});
 
 
 //EXTRAS
 /*
 - want newTodo to be first or last???
-- be able to put completed in Todos?
+- be able to put completed back in Todos.. or only delete?
 */
