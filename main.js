@@ -9,16 +9,16 @@ const deleteAllTodos = document.getElementById('deleteAllTodos');
 function addNewTodo(){
     var newLi = document.createElement('li');
     var newTodoInputValue = document.getElementById('newTodoInput').value;
-    //*TO MAKE*check if value is empty string so user cant add empty string
-    //check if new to do is already existing
     var newTextNode = document.createTextNode(newTodoInputValue);
     newLi.appendChild(newTextNode);
 
     var newDeleteButton = document.createElement('button');
-    newDeleteButton.innerText = 'w';
+    newDeleteButton.setAttribute('id', 'deleteTodoButton');
+    newDeleteButton.innerText = 'D';
 
     var newCompleteButton = document.createElement('button');
-    newDeleteButton.innerText = 'jw';
+    newCompleteButton.setAttribute('id', 'completeButton');
+    newCompleteButton.innerText = 'C';
 
     newLi.appendChild(newDeleteButton);
     newLi.appendChild(newCompleteButton);
@@ -51,6 +51,8 @@ function addNewTodo(){
 
 
 //EVENTLISTENERS
+//*TO MAKE*so user cant add empty string
+//so user can't make the same todo twice, maybe ask
 newTodoButton.addEventListener('click', addNewTodo);
 
 
