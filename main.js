@@ -25,10 +25,10 @@ function addNewTodo(value){
 
     //creating complete button
     var completeButton = document.createElement('button');
-    completeButton.classList.add('complete')
+    completeButton.classList.add('uncompleted')
     completeButton.innerHTML = completeIcon;
     //adding eventlistener
-    completeButton.addEventListener('click', completeTodo);
+    completeButton.addEventListener('click', completeOrUncompleteTodo);
 
     newLi.appendChild(deleteTodoButton);
     newLi.appendChild(completeButton);
@@ -53,14 +53,18 @@ function deleteOneTodo(){
 
 
 //Actually toggles complete or not completed the todos
-function completeTodo(){
+function completeOrUncompleteTodo(){
     parentToMove = this.parentNode;
     parentToMoveFrom = parentToMove.parentNode;
         if(parentToMoveFrom.id === 'todoList')
             {
             document.getElementById('completedTodoList').appendChild(parentToMove);
+            this.classList.remove('uncompleted');
+            this.classList.add('completed');
             } else {
                 document.getElementById('todoList').appendChild(parentToMove);
+                this.classList.remove('completed');
+                this.classList.add('uncompleted');
                     }
     
 }
