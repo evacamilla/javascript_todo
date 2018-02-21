@@ -7,7 +7,7 @@ ul{
     color: deeppink;
 }
 
-.deleteTodo {
+.deleteTodoButton {
     background: white;
     color: red;
     border-radius: 55%;

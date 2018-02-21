@@ -4,9 +4,11 @@ const addTodoButton = document.getElementById('addTodoButton');
 //Button for deleting all todos
 const deleteAllTodos = document.getElementById('deleteAllTodos');
 
-//Icons
+//Icons HTML
 const deleteIcon = '<i class="fas fa-times"></i>';
 const completeIcon = '<i class="fas fa-check"></i>';
+
+
 
 //ADD FUNCTIONS
 //add new todo
@@ -16,16 +18,16 @@ function addNewTodo(value){
     var newTextNode = document.createTextNode(newValue);
     newLi.appendChild(newTextNode);
 
-    //*TO MAKE*add class delete
+    //creating the delete button
     var deleteTodoButton = document.createElement('button');
-    deleteTodoButton.classList.add('deleteTodo');
-    deleteTodoButton.setAttribute('id', 'deleteTodoButton');
+    deleteTodoButton.classList.add('deleteTodoButton');
     deleteTodoButton.innerHTML = deleteIcon;
+    //adding eventlistener
+    deleteTodoButton.addEventListener('click', deleteOneTodo);
 
-    //*TO MAKE*add class complete
+    //creating complete button
     var completeButton = document.createElement('button');
     completeButton.classList.add('complete')
-    completeButton.setAttribute('id', 'completeButton');
     completeButton.innerHTML = completeIcon;
 
     newLi.appendChild(deleteTodoButton);
@@ -38,7 +40,11 @@ function addNewTodo(value){
 
 
 //DELETE FUNCTIONS
+
 //delete one todo
+function deleteOneTodo(){
+    console.log(this.parentNode);
+}
 
 //delete all todos
 
