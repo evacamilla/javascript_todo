@@ -1,8 +1,24 @@
+
 //store data in object so that user can come back and find the todos
-var data = {
+//check if there is any data stored since before using localStorage
+if(localStorage.getItem('todoList')){
+    //since its strinified make it as an object again using JSON.parse
+    var data = JSON.parse(localStorage.getItem('todoList'))
+} else {
+    //else set arrays to be empty
+    var data = {
     todoArray: [],
     completedArray: []
-};
+}};
+
+console.log(data);
+
+//this should run whenever user adds, moves or delete and item
+function updateDataObject(){
+    //convert object into text because localStorage cannot store objects, only text.
+    localStorage.setItem('todoList', JSON.stringify(data));
+}
+
 
 
 //Getting buttons already in html
@@ -12,8 +28,6 @@ const deleteAllTodos = document.getElementById('deleteAllTodos');
 //Icons HTML
 const deleteIcon = '<i class="fas fa-times"></i>';
 const completeIcon = '<i class="fas fa-check"></i>';
-
-
 
 
 
@@ -43,6 +57,8 @@ function addNewTodo(value){
     document.getElementById('todoList').appendChild(newLi);
     //value put to empty string so input field is empty when user clicked on add button
     document.getElementById("addTodoInput").value = "";
+    
+    updateDataObject();
 }
 
 
@@ -52,8 +68,16 @@ function addNewTodo(value){
 function deleteOneTodo(){
     var parentToRemove = this.parentNode;
     parentToRemoveFrom = parentToRemove.parentNode;
+    valueToRemove = parentToRemove.innerText;
+    if (parentToRemoveFrom.id === 'todoList'){
+        data.todoArray.splice(data.todoArray.indexOf(valueToRemove), 1);
+    } else {
+        data.completedArray.splice(data.completedArray.indexOf(valueToRemove), 1);
+    }
 
     parentToRemoveFrom.removeChild(parentToRemove);
+    
+    updateDataObject();
 }
 
 
@@ -67,19 +91,21 @@ function completeOrUncompleteTodo(){
         if(parentToMoveFrom.id === 'todoList')
             {
             //delete from todo array and push to completed in data object
-            data.todoArray.splice(data.todoArray.indexOf(valueToMove, 1));
+            data.todoArray.splice(data.todoArray.indexOf(valueToMove), 1);
             data.completedArray.push(valueToMove);
             document.getElementById('completedTodoList').appendChild(parentToMove);
             this.classList.remove('uncompleted');
             this.classList.add('completed');
             } else {
                 //delete from completed array and push to todo in data object
-                data.completedArray.splice(data.completedArray.indexOf(valueToMove, 1));
+                data.completedArray.splice(data.completedArray.indexOf(valueToMove), 1);
                 data.todoArray.push(valueToMove);
                 document.getElementById('todoList').appendChild(parentToMove);
                 this.classList.remove('completed');
                 this.classList.add('uncompleted');
                     }
+            
+    updateDataObject();
 }
 
 
