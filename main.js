@@ -1,6 +1,6 @@
 //Getting buttons already in html
 const addTodoButton = document.getElementById('addTodoButton');
-const deleteAllTodos = document.getElementById('deleteAllTodos');
+const deleteAllTodosButton = document.getElementById('deleteAllTodos');
 
 //Icons HTML
 const deleteIcon = '<i class="fas fa-times"></i>';
@@ -42,13 +42,36 @@ addTodoButton.addEventListener('click', function(){
 });
 
 
-deleteAllTodos.addEventListener('click', function(){
-    localStorage.clear('todoList');
-    // to delete also from DOM
-});
+deleteAllTodosButton.addEventListener('click', deleteAllTodos);
 
 
 /* F u n c t i o n s */
+
+
+function deleteAllTodos(){
+    //before make user confirm that they want to delete for function to run
+    if(confirm("Do you want to delete all your Todos? This is permanent")){
+        //delete stored data
+        localStorage.clear('todoList');
+
+        //delete also from DOM
+        while (todoList.hasChildNodes()) 
+        { 
+            todoList = document.getElementById('todoList'); 
+            todoList.removeChild(todoList.firstChild);
+        } 
+
+        while (completedTodoList.hasChildNodes()) 
+        { 
+            completedTodoList = document.getElementById('completedTodoList'); 
+            completedTodoList.removeChild(completedTodoList.firstChild);
+        } }
+        
+    //if user didnt confirm
+    else {
+        return;
+        }
+}
 
 
 //store data in object so that user can come back and find the todos
@@ -85,9 +108,12 @@ function addNewTodo(value, completed){
     
     if(completed === true){
         completeButton.classList.add('completed');
-        document.getElementById('completedTodoList').appendChild(newLi);
+        list = document.getElementById('completedTodoList');
+        //insertBefore so that the newest added ends up at the top
+        list.insertBefore(newLi, list.childNodes[0]);
         } else {
-                document.getElementById('todoList').appendChild(newLi);
+                list = document.getElementById('todoList');
+                list.insertBefore(newLi, list.childNodes[0]);
                 }
 
     //value put to empty string so input field is empty when user clicked on add button
@@ -160,8 +186,7 @@ function loopOutTodoList(){
 
 /**TO DO **/
 /*
-new todo on top
-erase all todos
+erase all todos in the dom
 */
 
 
@@ -169,4 +194,5 @@ erase all todos
 /*
 transition/animate when completed
 press enter to add
+when deleting: check if there is any data
 */
