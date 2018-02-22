@@ -1,7 +1,7 @@
 //store data in object so that user can come back and find the todos
 var data = {
-    todo: [],
-    completed: []
+    todoArray: [],
+    completedArray: []
 };
 
 
@@ -67,20 +67,19 @@ function completeOrUncompleteTodo(){
         if(parentToMoveFrom.id === 'todoList')
             {
             //delete from todo array and push to completed in data object
-            data.todo.splice(data.todo.indexOf(valueToMove, 1));
-            data.completed.push(valueToMove);
+            data.todoArray.splice(data.todoArray.indexOf(valueToMove, 1));
+            data.completedArray.push(valueToMove);
             document.getElementById('completedTodoList').appendChild(parentToMove);
             this.classList.remove('uncompleted');
             this.classList.add('completed');
             } else {
                 //delete from completed array and push to todo in data object
-                data.completed.splice(data.completed.indexOf(valueToMove, 1));
-                data.todo.push(valueToMove);
+                data.completedArray.splice(data.completedArray.indexOf(valueToMove, 1));
+                data.todoArray.push(valueToMove);
                 document.getElementById('todoList').appendChild(parentToMove);
                 this.classList.remove('completed');
                 this.classList.add('uncompleted');
                     }
-    console.log(data);
 }
 
 
@@ -95,7 +94,7 @@ addTodoButton.addEventListener('click', function(){
     else{
         document.getElementById('emptyStringMessage').style.display = "none";
         //stores added string in todo array so user can see it also after reloading the page
-        data.todo.push(addTodoInputValue);
+        data.todoArray.push(addTodoInputValue);
         addNewTodo(addTodoInputValue);
         }
 });
