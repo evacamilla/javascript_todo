@@ -1,9 +1,9 @@
-
-//store data in object so that user can come back and find the todos
 //check if there is any data stored since before using localStorage
 if(localStorage.getItem('todoList')){
     //since its strinified make it as an object again using JSON.parse
     var data = JSON.parse(localStorage.getItem('todoList'))
+    //loop out data to DOM
+    loopOutTodoList();
 } else {
     //else set arrays to be empty
     var data = {
@@ -11,15 +11,27 @@ if(localStorage.getItem('todoList')){
     completedArray: []
 }};
 
-console.log(data);
 
+//store data in object so that user can come back and find the todos
 //this should run whenever user adds, moves or delete and item
 function updateDataObject(){
     //convert object into text because localStorage cannot store objects, only text.
     localStorage.setItem('todoList', JSON.stringify(data));
 }
 
+//this runs if something is stored in localStorage
+function loopOutTodoList(){
+    
+    for(var i = 0; i < data.todoArray.length; i++){
+        todoValue = data.todoArray[i];
+        console.log(todoValue);
+    }
 
+    for(var i = 0; i < data.completedArray.length; i++){
+        completedValue = data.completedArray[i];
+        console.log(completedValue);
+    }
+}
 
 //Getting buttons already in html
 const addTodoButton = document.getElementById('addTodoButton');
