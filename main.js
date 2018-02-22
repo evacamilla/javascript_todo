@@ -54,7 +54,7 @@ function deleteAllTodos(){
         //delete stored data
         localStorage.clear('todoList');
 
-        //delete also from DOM
+        //delete from both lists also from DOM
         while (todoList.hasChildNodes()) 
         { 
             todoList = document.getElementById('todoList'); 
@@ -65,7 +65,8 @@ function deleteAllTodos(){
         { 
             completedTodoList = document.getElementById('completedTodoList'); 
             completedTodoList.removeChild(completedTodoList.firstChild);
-        } }
+        } 
+    }
         
     //if user didnt confirm
     else {
@@ -84,6 +85,7 @@ function updateDataObject(){
 
 
 function addNewTodo(value, completed){
+    var newDiv = document.createElement('div');
     var newLi = document.createElement('li');
     var newValue = value;
     var newTextNode = document.createTextNode(newValue);
@@ -106,14 +108,16 @@ function addNewTodo(value, completed){
     newLi.appendChild(deleteTodoButton);
     newLi.appendChild(completeButton);
     
+    newDiv.appendChild(newLi);
+
     if(completed === true){
         completeButton.classList.add('completed');
         list = document.getElementById('completedTodoList');
         //insertBefore so that the newest added ends up at the top
-        list.insertBefore(newLi, list.childNodes[0]);
+        list.insertBefore(newDiv, list.childNodes[0]);
         } else {
                 list = document.getElementById('todoList');
-                list.insertBefore(newLi, list.childNodes[0]);
+                list.insertBefore(newDiv, list.childNodes[0]);
                 }
 
     //value put to empty string so input field is empty when user clicked on add button
@@ -126,9 +130,10 @@ function addNewTodo(value, completed){
 
 
 function deleteOneTodo(){
-    var parentToRemove = this.parentNode;
+    var parentToRemove = this.parentNode.parentNode;
     parentToRemoveFrom = parentToRemove.parentNode;
     valueToRemove = parentToRemove.innerText;
+    console.log(parentToRemoveFrom);
     if (parentToRemoveFrom.id === 'todoList'){
         data.todoArray.splice(data.todoArray.indexOf(valueToRemove), 1);
     } else {
@@ -144,29 +149,47 @@ function deleteOneTodo(){
 
 
 function completeOrUncompleteTodo(){
-    parentToMove = this.parentNode;
+    //to grab the todo we must reach the div element(parent of parent of the button clicked) 
+    parentToMove = this.parentNode.parentNode;
+    //and then that parent we want to move it from = the ul element
     parentToMoveFrom = parentToMove.parentNode;
+
     //storing the value from the data.array so we can delete and store it in data object
     var valueToMove = parentToMoveFrom.innerText;
+
         if(parentToMoveFrom.id === 'todoList')
             {
+            var completedTodoList = document.getElementById('completedTodoList');
+
             //delete from todo array and push to completed in data object
             data.todoArray.splice(data.todoArray.indexOf(valueToMove), 1);
             data.completedArray.push(valueToMove);
-            document.getElementById('completedTodoList').appendChild(parentToMove);
+
+            //add to top of ul li arrray in DOM
+            completedTodoList.insertBefore(parentToMove, completedTodoList.childNodes[0]);
+
+            //change styling
             this.classList.remove('uncompleted');
             this.classList.add('completed');
             } else {
+                var todoList = document.getElementById('todoList');
+
                 //delete from completed array and push to todo in data object
                 data.completedArray.splice(data.completedArray.indexOf(valueToMove), 1);
                 data.todoArray.push(valueToMove);
-                document.getElementById('todoList').appendChild(parentToMove);
+
+                //add to top of ul li array in DOM
+                todoList.insertBefore(parentToMove, todoList.childNodes[0]);
+
+                //change styling
                 this.classList.remove('completed');
                 this.classList.add('uncompleted');
                     }
             
     updateDataObject();
 }
+
+
 
 
 
@@ -184,15 +207,12 @@ function loopOutTodoList(){
 }
 
 
-/**TO DO **/
-/*
-erase all todos in the dom
-*/
-
 
 //EXTRAS
 /*
 transition/animate when completed
 press enter to add
+DELETEBUTTON:
 when deleting: check if there is any data
+or hide/show button depending on if there is data
 */
