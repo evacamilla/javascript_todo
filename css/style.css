@@ -1,15 +1,48 @@
-body {
-    background: palevioletred;
+header h1 {
+    text-align: center;
 }
+
+.addNewDiv {
+    background: palevioletred;
+    border-radius: 5px;
+    width:100%;
+    padding: 10px;
+}
+
+.addNewDiv input {
+    background: pink;
+    border: none;
+}
+
+.addNewDiv button {
+    background: pink;
+    border: none;
+}
+
 
 ul{
     list-style: none;
 }
 
+#todoList li {
+    margin-left: -40px;
+    padding-left:10px;
+    border: 1px solid grey;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
 .addTodo {
     background: white;
-    color: deeppink;
 }
+
+
 
 .deleteTodoButton {
     background: white;
