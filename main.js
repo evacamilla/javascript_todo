@@ -3,8 +3,8 @@ const addTodoButton = document.getElementById('addTodoButton');
 const deleteAllTodosButton = document.getElementById('deleteAllTodos');
 
 //Icons HTML
-const deleteIcon = '<i class="fas fa-times"></i>';
-const completeIcon = '<i class="fas fa-check"></i>';
+const deleteIcon = '<i class="far fa-trash-alt"></i>';
+const completeIcon = '<i class="far fa-check-circle"></i>';
 
 
 
@@ -45,6 +45,7 @@ addTodoButton.addEventListener('click', function(){
 deleteAllTodosButton.addEventListener('click', deleteAllTodos);
 
 
+
 /* F u n c t i o n s */
 
 
@@ -75,14 +76,6 @@ function deleteAllTodos(){
 }
 
 
-//store data in object so that user can come back and find the todos
-//this should run whenever user adds, moves or delete and item
-function updateDataObject(){
-    //convert object into text because localStorage cannot store objects, only text.
-    localStorage.setItem('todoList', JSON.stringify(data));
-}
-
-
 
 function addNewTodo(value, completed){
     var newDiv = document.createElement('div');
@@ -105,19 +98,19 @@ function addNewTodo(value, completed){
     //adding eventlistener
     completeButton.addEventListener('click', completeOrUncompleteTodo);
 
-    newLi.appendChild(deleteTodoButton);
-    newLi.appendChild(completeButton);
+    newDiv.appendChild(deleteTodoButton);
+    newDiv.appendChild(completeButton);
     
-    newDiv.appendChild(newLi);
+    newLi.appendChild(newDiv);
 
     if(completed === true){
         completeButton.classList.add('completed');
         list = document.getElementById('completedTodoList');
         //insertBefore so that the newest added ends up at the top
-        list.insertBefore(newDiv, list.childNodes[0]);
+        list.insertBefore(newLi, list.childNodes[0]);
         } else {
                 list = document.getElementById('todoList');
-                list.insertBefore(newDiv, list.childNodes[0]);
+                list.insertBefore(newLi, list.childNodes[0]);
                 }
 
     //value put to empty string so input field is empty when user clicked on add button
@@ -189,6 +182,14 @@ function completeOrUncompleteTodo(){
     updateDataObject();
 }
 
+
+
+//store data in object so that user can come back and find the todos
+//this should run whenever user adds, moves or delete and item
+function updateDataObject(){
+    //convert object into text because localStorage cannot store objects, only text.
+    localStorage.setItem('todoList', JSON.stringify(data));
+}
 
 
 

@@ -15,16 +15,24 @@
     <div class="container">
         <div class="row">
             <header>
-                <h1>My todo list</h1>
+                    <h1>
+                        <i class="fas fa-eye"></i>
+                        My todo list
+                    </h1>
             </header>
 
             <main>
+
                 <div class="addNewDiv">
                     <input type="text" id="addTodoInput" placeholder="Add new todo here">
-                    <button class="addTodo" id="addTodoButton">Add it</button>
-                </div>
+
+                    <button class="addTodo" id="addTodoButton">
+                        <i class="fas fa-plus-circle"></i>
+                    </button>
+                </div> 
 
                 <p id="emptyStringMessage" style="display:none">Oops, you have to actually write something to add it to the list</p>
+
 
                 <ul id="todoList">
                     <!--Generated with JS-->
