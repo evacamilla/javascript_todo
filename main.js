@@ -1,18 +1,12 @@
-//Getting buttons already in html
-const addTodoButton = document.getElementById('addTodoButton');
-const deleteAllTodosButton = document.getElementById('deleteAllTodos');
 
 //Icons HTML
 const deleteIcon = '<i class="far fa-trash-alt"></i>';
 const completeIcon = '<i class="far fa-check-circle"></i>';
 
-
-
-
 //check if there is any data stored since before using localStorage
 if(localStorage.getItem('todoList')){
     //since its strinified make it as an object again using JSON.parse
-    var data = JSON.parse(localStorage.getItem('todoList'))
+    var data = JSON.parse(localStorage.getItem('todoList'));
     //loop out data to DOM
     loopOutTodoList();
 } else {
@@ -21,6 +15,12 @@ if(localStorage.getItem('todoList')){
     todoArray: [],
     completedArray: []
 }};
+
+//Getting buttons already in html
+const addTodoButton = document.getElementById('addTodoButton');
+const deleteAllTodosButton = document.getElementById('deleteAllTodos');
+
+
 
 
 
@@ -53,7 +53,7 @@ function deleteAllTodos(){
     //before make user confirm that they want to delete for function to run
     if(confirm("Do you want to delete all your Todos? This is permanent")){
         //delete stored data
-        localStorage.clear('todoList');
+        localStorage.clear();
 
         //delete from both lists also from DOM
         while (todoList.hasChildNodes()) 
@@ -183,15 +183,12 @@ function completeOrUncompleteTodo(){
 }
 
 
-
 //store data in object so that user can come back and find the todos
 //this should run whenever user adds, moves or delete and item
 function updateDataObject(){
     //convert object into text because localStorage cannot store objects, only text.
     localStorage.setItem('todoList', JSON.stringify(data));
 }
-
-
 
 
 //this runs if something is stored in localStorage
